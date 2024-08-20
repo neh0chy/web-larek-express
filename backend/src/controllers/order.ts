@@ -17,12 +17,7 @@ const placeOrder = async (req: Request, res: Response, next: NextFunction) => {
       return next(new BadRequestError('Передан товар, который не продается'));
     }
 
-    const productSum = products.reduce((sum, item) => {
-      if (item.price !== null) {
-        return sum + Number(item.price);
-      }
-      return sum;
-    }, 0);
+    const productSum = products.reduce((sum, item) => sum + Number(item.price), 0);
 
     if (total !== productSum) {
       return next(new BadRequestError('Неправильная сумма товаров'));
