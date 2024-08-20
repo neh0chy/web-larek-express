@@ -1,4 +1,3 @@
-/* eslint-disable consistent-return */
 import { Request, Response, NextFunction } from 'express';
 import { faker } from '@faker-js/faker';
 import { Error as MongooseError } from 'mongoose';
