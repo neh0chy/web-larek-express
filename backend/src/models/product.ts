@@ -16,28 +16,28 @@ const productSchema = new mongoose.Schema<IProduct>({
     type: String,
     required: true,
     minlength: 2,
-    maxlength: 30
+    maxlength: 30,
   },
   image: {
     type: {
       fileName: String,
-      originalName: String
+      originalName: String,
     },
-    required: true
+    required: true,
   },
   category: {
     type: String,
-    required: true
+    required: true,
   },
   description: {
     type: String,
-    required: false
+    required: false,
   },
   price: {
     type: Number,
     required: false,
-    default: null
-  }
+    default: null,
+  },
 });
 
 export default mongoose.model<IProduct>('product', productSchema);
