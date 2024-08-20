@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-interface IProduct {
+export interface IProduct {
   title: String;
   image: {
     fileName: String;
@@ -30,9 +30,14 @@ const productSchema = new mongoose.Schema<IProduct>({
     required: true
   },
   description: {
-    type: String
+    type: String,
+    required: false
   },
-  price: {}
+  price: {
+    type: Number,
+    required: false,
+    default: null
+  }
 });
 
 export default mongoose.model<IProduct>('product', productSchema);
