@@ -3,7 +3,6 @@ import { faker } from '@faker-js/faker';
 import { Error as MongooseError } from 'mongoose';
 import Product from '../models/product';
 import BadRequestError from '../errors/bad-request-error';
-import InternalServerError from '../errors/internal-server-error';
 import { IOrder } from '../middlewares/validation';
 
 const placeOrder = async (req: Request, res: Response, next: NextFunction) => {
@@ -26,7 +25,7 @@ const placeOrder = async (req: Request, res: Response, next: NextFunction) => {
       return next(new BadRequestError('Передан неправильный id'));
     }
 
-    return res.status(200).send({
+    return res.status(201).send({
       id: faker.string.uuid(),
       total: productSum,
     });
@@ -34,7 +33,7 @@ const placeOrder = async (req: Request, res: Response, next: NextFunction) => {
     if (error instanceof MongooseError.ValidationError) {
       return next(new BadRequestError(error.message));
     }
-    return next(new InternalServerError((error as Error).message));
+    return next(error);
   }
 };
 
